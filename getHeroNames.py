@@ -19,8 +19,10 @@ names = []
 ids = []
 for d in heroListTemp:
     fullName = d['name']
-    names.append(fullName.split('_')[-1])
+    delimiter = '_'
+    names.append(delimiter.join(fullName.split('_')[3:]))
     ids.append(d['id'])
+
 # Call x matches by steam id
 
 apiCallStringBase = 'http://api.steampowered.com/IDOTA2Match_570/GetMatchHistory/v1/?matches_requested={}_?&account_id={}_?&key={}'
@@ -33,4 +35,13 @@ r = requests.get(apiCallStringBase.format(matchesToCall,steamId,apiKey))
 
 matchDeets = r.json()
 
-#get heroes played
+#get heroes played in the match
+
+playerDeets = matchDeets['result']['matches'][0]['players']
+
+heroesPlayed = []
+for d in playerDeets:
+    heroIdPlayed = d['hero_id']
+    heroesPlayed.append(names[ids.index(heroIdPlayed)])
+    
+    
