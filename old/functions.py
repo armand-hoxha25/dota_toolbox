@@ -7,6 +7,10 @@ This is a temporary script file.
 import requests
 import datetime
 import time
+import shutil
+import pandas as pd
+import seaborn as sns
+
 apiKey = 'C0653C275405A0DC18DDCE46BA8645C2'
 steamId = '76561198089787694'
 numMatches = '100'
@@ -111,8 +115,6 @@ def unix_to_date(unix_time):
      return datetime.datetime.fromtimestamp(unix_time).strftime('%Y-%m-%d %H:%M:%S')   
 
 
-for j in range(0,333):
-    print(unix_to_date(matchDict[j]['start_time']))
 
 def countHeroesPlayed(dotaId, matchHistory, heroList, idList):
     """Go through a players match history and get a list/count of all heroes played and plot"""
@@ -172,4 +174,38 @@ def get_player_ids(steam64ID):
         return "Unknown", "Unknown"
     dotaid=txt[start+pad:end]
 
-    return nick_name,int(dotaid)    
+    return nick_name,int(dotaid)
+            
+def downloadHeroPortraits(names):
+    
+    apiBase = 'http://cdn.dota2.com/apps/dota2/images/heroes/{}_{}'
+    for n in range(0,len(names)):
+        apiCall = apiBase.format(names[n],'vert.jpg')
+    
+        apiReturn = requests.get(apiCall,stream = True)
+        
+        apiReturn.raw.decode_content = True
+        
+        filename = apiCall.split('/')[-1]
+        
+        with open(filename,'wb') as f:
+            shutil.copyfileobj(apiReturn.raw, f)
+            
+def plotHeroesPlayed(heroesPlayedList):
+    
+    heroesPlayedNames = []
+    heroesPlayedCounts = []
+    for i in range(0,len(heroesPlayedList)):
+        heroesPlayedNames.append(heroesPlayedList[i]['Hero'])
+        heroesPlayedCounts.append(heroesPlayedList[i]['TimesPlayed'])
+    
+    heroStats = {'heroNames': heroesPlayedNames, 'playCount': heroesPlayedCounts}
+    
+    h = sns.barplot(data=heroStats,x='heroNames',y='playCount')
+    
+    h.set_xticklabels(h.get_xticklabels(),rotation=45)
+    
+    h.set(xlabel = 'Hero', ylabel = 'Times Played', title = 'Hero History')
+
+# def get_all_matches()
+    
