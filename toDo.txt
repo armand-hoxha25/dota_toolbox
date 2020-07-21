@@ -1,0 +1,26 @@
+1. parse info and store(store in pandas)
+	a.) winrates
+	b.) hero play counts
+	c.) hero winrates
+	d.) dire + radiant winrates
+
+you
+		matchid(uniqueKey)
+			p1	
+				heroId
+				win 1,0
+				radiant/dire
+				k
+				d
+				a
+			p2
+				heroId
+				win 1,0
+				radiant/dire
+				k
+				d
+				a
+
+		
+	
+	
