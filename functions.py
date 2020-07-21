@@ -77,6 +77,8 @@ def getPlayerMatchHistory(steamId,numMatches,apiKey):
         apiCall = apiCallStringBase.format(100,steamId,apiKey)
         apiReturn = requests.get(apiCall)
         matchDict = apiReturn.json()['result']['matches']
+        print(matchDict.json())
+
     else:
         apiCall = apiCallStringBase.format(100,steamId,apiKey)
         apiReturn = requests.get(apiCall)
@@ -101,14 +103,14 @@ def getPlayerMatchHistory(steamId,numMatches,apiKey):
             if len(matchDict)>numMatches:
                 return_matches=matchDict[0:numMatches]
                 cond=False
-            time.sleep(0.1)
+            time.sleep(2)
     return matchDict
 
- def unix_to_date(unix_time):
-     return datetime.datetime.fromtimestamp(unix_time).strftime('%Y-%m-%d %H:%M:%S')   
+def unix_to_date(unix_time):
+    return datetime.datetime.fromtimestamp(unix_time).strftime('%Y-%m-%d %H:%M:%S')   
 
- def unix_to_date(unix_time):
-     return datetime.datetime.fromtimestamp(unix_time).strftime('%Y-%m-%d %H:%M:%S')   
+def unix_to_date(unix_time):
+    return datetime.datetime.fromtimestamp(unix_time).strftime('%Y-%m-%d %H:%M:%S')   
 
 
 for j in range(0,333):
@@ -172,7 +174,5 @@ def get_player_ids(steam64ID):
         return "Unknown", "Unknown"
     dotaid=txt[start+pad:end]
 
-    return nick_name,int(dotaid)
-            
-def get_all_matches()
+    return nick_name,int(dotaid)            
     
