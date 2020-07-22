@@ -22,4 +22,6 @@ def getHeroList():
         
          names.append(heroSpecs['localized_name'])
          ids.append(heroSpecs['id'])
-    return names,ids
+         
+    heroList = pd.DataFrame({'Hero_IDs':ids,'Hero_Names':names})
+    return heroList
