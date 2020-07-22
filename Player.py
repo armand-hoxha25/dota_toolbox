@@ -1,20 +1,26 @@
-class Player(account_id):
+import pickle
+import pandas as pd
+import requests
+
+class Player:
     '''
     The Player class includes all the characteristics of a player.
     Input:
-    the Dota Id or the Steam 32 bit ID
+
+    account_id (int): the Dota Id or the Steam 32 bit ID
     '''
 
-    def __init__(self):
+    def __init__(self,account_id):
         '''
         Initialize the Player object with default values for placeholders
         '''
+        self.account_id=account_id
         self.nickname=""
         self.matchhistory_json=[]
         self.matchhistory_df=[]
         
 
-    def get_player_match_history(self,account_id):
+    def opendota_get_player_match_history(self):
         '''
         Fetches the last 10,000 matches of the player, and saves it into a pickle file (due to limited
         number of api calls in each month)
@@ -26,15 +32,21 @@ class Player(account_id):
         matchhistory (dict): a list of dictionaries of each match played with the opendota format
         '''
         api_req='''https://api.opendota.com/api/players/{}/matches?limit=10000&project=heroes'''
-        r=requests.get(api_req.format(account_id))
-        matchhistory=r.json()
-        pickle.dump(matchhistory,open(str(account_id)+'_matches.p','wb'))
-        return matchhistory
+        r=requests.get(api_req.format(self.account_id))
+        self.matchhistory_json=r.json()
+        pickle.dump(matchhistory,open(str(self.account_id)+'_matches.p','wb'))
+        
 
-    # load the json object saved
-    matchhistory=pickle.load(open(filepath,'rb'))
+    def load_match_history(self,path):
+        '''
+        Load the .p json match history file into the player card. This saves request calls to the api as they are limited.
+        Input:
+        path (str) : the string path to the .p match history json dictionary of the player.
+        '''
+        # load the json object saved
+        self.matchhistory_json=pickle.load(open(path,'rb'))
 
-    def parse_player_match_history(self,matchhistory):
+    def parse_player_match_history(self):
         '''
         Parses the json data from the match history of a player.
 
@@ -51,19 +63,20 @@ class Player(account_id):
 
         '''
         ## parse open dota data
+
         match_ids=[]
         heroes=[]
         match_length=[]
         win=[]
         team_radiant=[] # player_slot < 128 is radiant
-        l=len(matchhistory)
+        l=len(self.matchhistory_json)
         n=0
-        for match in matchhistory:
+        for match in self.matchhistory_json:
             match_ids.append(match['match_id'])
             playersheroes=list(match['heroes'].values())
             for d in playersheroes:
                 try:
-                    if d['account_id']==account_id:
+                    if d['account_id']==self.account_id:
                         break
                 except KeyError:
                     pass
@@ -82,8 +95,22 @@ class Player(account_id):
         'match_length':match_length,
         'win':win,
         'team_radiant':team_radiant})
-        return player_df
+        self.matchhistory_df=player_df
+    
+    def save_player(self,path_buff=""):
+        '''
+        Pickle the player object.
 
-if __name__=='main':
+        Input:
+        path_buff (str): save directory or path
+        '''
+        pickle.dump(self,open(path_buff+str(self.account_id)+'player.p','wb'))
+        
+
+if __name__=='__main__':
     #initiate for Fresh Cookies example
+    print("running default Script")
     P=Player(78812268)
+    P.load_match_history('armand_matches.p')
+    P.parse_player_match_history()
+    print(P.matchhistory_df.head())
