@@ -18,6 +18,7 @@ class Player:
         self.nickname=""
         self.matchhistory_json=[]
         self.matchhistory_df=[]
+        self.get_name()
         
 
     def opendota_get_player_match_history(self):
@@ -105,7 +106,27 @@ class Player:
         path_buff (str): save directory or path
         '''
         pickle.dump(self,open(path_buff+str(self.account_id)+'player.p','wb'))
+    def get_name(self):
+        '''
+        searches through the steamid.xyz and scrapes the name
+        id: (str) steam id of the user to be searched
         
+        returns name (str)
+        '''
+        page=requests.get("https://steamid.xyz/{}".format(self.account_id))
+    #bsoup=BeautifulSoup(page.content,'html.parser')
+    #soup_list=list(bsoup.children)
+        txt=page.text
+        template_string='''Nick Name\r\n<input type="text" onclick="this.select();" value="'''
+        template_end='''">\r\nProfile URL\r\n<input type="text'''
+        pad=len(template_string)
+        start=txt.find(template_string)
+        end=txt.find(template_end)
+        ## find the end of the name
+        if start ==-1:
+            return "Unkown"
+        _name=txt[start+pad:end]
+        self.nickname=_name    
 
 if __name__=='__main__':
     #initiate for Fresh Cookies example
@@ -113,4 +134,5 @@ if __name__=='__main__':
     P=Player(78812268)
     P.load_match_history('armand_matches.p')
     P.parse_player_match_history()
+    print(P.nickname)
     print(P.matchhistory_df.head())
