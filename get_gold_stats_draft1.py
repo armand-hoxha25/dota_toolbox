@@ -7,7 +7,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 from get_match_info import parse_matchinfo
-
+import datetime as dt
 combatfile="./test_files/5528683650_combat.txt"
 infofile="./test_files/5528683650_info.txt"
 f=open(combatfile,'r')
@@ -15,10 +15,11 @@ f=open(combatfile,'r')
 txt=f.readlines()
 f.close()
 matchinfo=parse_matchinfo(infofile)
-timestamps=[]
+timestamp_gold=[]
 heroes=[]
 gold_change=[]
 experience_change=[]
+timestamp_xp=[]
 hero=matchinfo['hero_name'][0]
 m=1
 for l in txt:
@@ -34,6 +35,7 @@ for l in txt:
             m=-1
         e=l.find('gold')
         gold_change.append(m*int(l[s:e]))
+        timestamp_gold.append(l[1:13])
         
     
     if (hero in l) and ('XP' in l):
@@ -41,6 +43,6 @@ for l in txt:
         s=s+len('gains')
         e=l.find('XP')
         experience_change.append(int(l[s:e]))
-        
+        timestamp_xp.append(l[1:13])        
 
 
