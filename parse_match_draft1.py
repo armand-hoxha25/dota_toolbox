@@ -5,13 +5,13 @@ The .jar files were compiled using maven 3.6.3, Java 1.8.0.0_252
 '''
 if __name__=='__main__':
 
-    test_file=os.path.join(os.path.dirname(__file__),"test_files","5527126051.dem")
+    test_file=os.path.join(os.path.dirname(__file__),"test_files","5538111463_1967011834.dem")
 
     # parse the match .dem file into a txt files
-    out_combat=os.path.join(os.path.dirname(__file__),"test_files","5527126051_combat.txt")
-    out_info=os.path.join(os.path.dirname(__file__),"test_files","5527126051_info.txt")
-    out_lifestate=os.path.join(os.path.dirname(__file__),"test_files","5527126051_lifestate.txt")
-    out_matchend=os.path.join(os.path.dirname(__file__),"test_files","5527126051_matchend.txt")
+    out_combat=os.path.join(os.path.dirname(__file__),"test_files","5538111463_1967011834_combat.txt")
+    out_info=os.path.join(os.path.dirname(__file__),"test_files","5538111463_1967011834_info.txt")
+    out_lifestate=os.path.join(os.path.dirname(__file__),"test_files","5538111463_1967011834_lifestate.txt")
+    out_matchend=os.path.join(os.path.dirname(__file__),"test_files","5538111463_1967011834_matchend.txt")
 
     base='java -jar {} > {}'
 

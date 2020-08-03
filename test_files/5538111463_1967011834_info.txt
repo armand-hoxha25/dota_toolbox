@@ -1,0 +1,83 @@
+playback_time: 2787.1667
+playback_ticks: 83615
+playback_frames: 41801
+game_info {
+  dota {
+    match_id: 5538111463
+    game_mode: 22
+    game_winner: 2
+    player_info {
+      hero_name: "npc_dota_hero_life_stealer"
+      player_name: "\351\230\277\347\217\215\347\210\261\344\270\212\344\272\206\351\230\277\345\274\272"
+      is_fake_client: false
+      steamid: 76561198094721638
+      game_team: 2
+    }
+    player_info {
+      hero_name: "npc_dota_hero_sven"
+      player_name: "\346\210\267\347\224\260\346\203\240\346\242\250\351\246\231"
+      is_fake_client: false
+      steamid: 76561198122159685
+      game_team: 2
+    }
+    player_info {
+      hero_name: "npc_dota_hero_lich"
+      player_name: "\345\215\234\346\230\257\345\215\234\350\241\214"
+      is_fake_client: false
+      steamid: 76561198096621516
+      game_team: 2
+    }
+    player_info {
+      hero_name: "npc_dota_hero_night_stalker"
+      player_name: "\345\257\271\345\257\271\357\274\214\345\276\210\345\257\271\345\276\210\345\257\271"
+      is_fake_client: false
+      steamid: 76561198308909589
+      game_team: 2
+    }
+    player_info {
+      hero_name: "npc_dota_hero_rubick"
+      player_name: "fo\345\270\210\345\202\205\357\274\214\345\260\235\350\257\225\345\210\207\344\273\226\344\270\255\350\267\257"
+      is_fake_client: false
+      steamid: 76561198154497056
+      game_team: 2
+    }
+    player_info {
+      hero_name: "npc_dota_hero_witch_doctor"
+      player_name: "Weeaboos For Trump"
+      is_fake_client: false
+      steamid: 76561198044937542
+      game_team: 3
+    }
+    player_info {
+      hero_name: "npc_dota_hero_terrorblade"
+      player_name: "Trerrow"
+      is_fake_client: false
+      steamid: 76561198051368042
+      game_team: 3
+    }
+    player_info {
+      hero_name: "npc_dota_hero_undying"
+      player_name: "boot"
+      is_fake_client: false
+      steamid: 76561198004019179
+      game_team: 3
+    }
+    player_info {
+      hero_name: "npc_dota_hero_slardar"
+      player_name: "Adrien Bechard"
+      is_fake_client: false
+      steamid: 76561198128408277
+      game_team: 3
+    }
+    player_info {
+      hero_name: "npc_dota_hero_venomancer"
+      player_name: "GutterShark"
+      is_fake_client: false
+      steamid: 76561198089787694
+      game_team: 3
+    }
+    leagueid: 0
+    end_time: 1595825018
+  }
+}
+
