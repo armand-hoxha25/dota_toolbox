@@ -82,9 +82,9 @@ for hero in matchinfo['hero_name']:
     'timestamp_xp':timestamp_xp
     }
 
-df=pd.DataFrame({'gold_change':heroes_dict['npc_dota_hero_mirana']['gold_change'],\
-                 'timestamp':heroes_dict['npc_dota_hero_mirana']['timestamp_gold']})
+df=pd.DataFrame({'gold_change':heroes_dict['npc_dota_hero_arc_warden']['gold_change'],\
+                 'timestamp':heroes_dict['npc_dota_hero_arc_warden']['timestamp_gold']})
 
 df=df.sort_values(by='timestamp')
-df.plot(x='timestamp',y='gold_change')
+df.plot.scatter(x='timestamp',y='gold_change')
 plt.show()
