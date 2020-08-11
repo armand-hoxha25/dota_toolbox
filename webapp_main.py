@@ -10,7 +10,7 @@ def home():
         with open("tmp_txt.txt","w+") as f:
             f.write("OMG!!!")
         print("-----------matchid=",matchid,'------------------------')
-        return  f"<h1>{matchid}</h1>"
+        return  render_template("index_dash.html")
     else:
         return render_template("index.html", template_folder='templates')
     return render_template("index.html", template_folder='templates')
