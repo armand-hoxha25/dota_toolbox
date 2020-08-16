@@ -4,3 +4,5 @@ test_files/5527126051_info.txt
 test_files/5527126051.dem
 test_files/5527126051_matchend.txt
 test_files/5527126051_lifestate.txt
+test_files/temp_replay.dem
+*.dem
