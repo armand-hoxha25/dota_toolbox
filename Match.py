@@ -31,9 +31,9 @@ class Match:
         '''
         print("Fetching match id :", self.matchid)
         self.get_match_file_url()
-        r=requests.get(replay_url)
+        r=requests.get(self.replay_url)
         decompressed=bz2.decompress(r.content)
-        open('temp_replay.dem','wb').write(r.content)
+        open('temp_replay.dem','wb').write(decompressed)
         print("Match downloaded")
         pass
 
@@ -42,7 +42,7 @@ class Match:
         parse the data from the match
         populate the match details 
         '''
-        test_file=os.path.join(os.path.dirname(__file__),"test_files","temp_replay.dem")
+        test_file=os.path.join(os.path.dirname(__file__),"temp_replay.dem")
 
         # parse the match .dem file into a txt files
         out_combat=os.path.join(os.path.dirname(__file__),"test_files","temp_combat.txt")
@@ -59,11 +59,16 @@ class Match:
         parsers=['/clarity_jars/'+parser for parser in parsers]
         outputs=[out_combat, out_info, out_lifestate, out_matchend]
         for parser,out in zip(parsers,outputs):
-            #print(base.format(parser,out).split()) 
-            s = subprocess.call("java -jar "+os.path.dirname(__file__)+\
-                parser + " "+test_file\
-                + ">" +out,
-                shell = True) 
+            #print(base.format(parser,out).split())
+            exec_call="java -jar "+os.path.dirname(__file__)+\
+                parser + " "+test_file + " > " +out 
+            print(exec_call)
+            s = subprocess.call(exec_call,
+                shell = True, stderr=subprocess.STDOUT) 
+            if s==0:
+                pass
+            else:
+                print("Could not parse data")
             print(", return code", s)   
 
         pass
@@ -111,7 +116,8 @@ class Match:
             steamid.append(int(txt[i+4].replace("steamid:","")))
             game_team.append(int(txt[i+5].replace("game_team:","")))
 
-        df=pd.DataFrame({'hero_name':hero_name,
+        hero_names=[h.replace('npc_dota_hero_','') for h in hero_name]
+        df=pd.DataFrame({'hero_name':hero_names,
                         'player_name':player_name,
                         'steamid':steamid,
                         'game_team':game_team})

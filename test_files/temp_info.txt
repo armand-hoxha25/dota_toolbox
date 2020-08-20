@@ -1,0 +1,83 @@
+playback_time: 2587.3667
+playback_ticks: 77621
+playback_frames: 38808
+game_info {
+  dota {
+    match_id: 5575832309
+    game_mode: 22
+    game_winner: 3
+    player_info {
+      hero_name: "npc_dota_hero_invoker"
+      player_name: "SleepingForest.."
+      is_fake_client: false
+      steamid: 76561198076201908
+      game_team: 2
+    }
+    player_info {
+      hero_name: "npc_dota_hero_disruptor"
+      player_name: "Zasta"
+      is_fake_client: false
+      steamid: 76561198092451971
+      game_team: 2
+    }
+    player_info {
+      hero_name: "npc_dota_hero_enigma"
+      player_name: "twitch.tv/ferrOTobii"
+      is_fake_client: false
+      steamid: 76561198031702407
+      game_team: 2
+    }
+    player_info {
+      hero_name: "npc_dota_hero_tusk"
+      player_name: "Fresh Cookies"
+      is_fake_client: false
+      steamid: 76561198039077996
+      game_team: 2
+    }
+    player_info {
+      hero_name: "npc_dota_hero_antimage"
+      player_name: "Yorekin"
+      is_fake_client: false
+      steamid: 76561198169753117
+      game_team: 2
+    }
+    player_info {
+      hero_name: "npc_dota_hero_crystal_maiden"
+      player_name: "Strumiee"
+      is_fake_client: false
+      steamid: 76561197993293143
+      game_team: 3
+    }
+    player_info {
+      hero_name: "npc_dota_hero_drow_ranger"
+      player_name: "Bowgli"
+      is_fake_client: false
+      steamid: 76561198093535310
+      game_team: 3
+    }
+    player_info {
+      hero_name: "npc_dota_hero_bounty_hunter"
+      player_name: "Not The Night Vulture"
+      is_fake_client: false
+      steamid: 76561198040100341
+      game_team: 3
+    }
+    player_info {
+      hero_name: "npc_dota_hero_rattletrap"
+      player_name: "Daegan"
+      is_fake_client: false
+      steamid: 76561198089361674
+      game_team: 3
+    }
+    player_info {
+      hero_name: "npc_dota_hero_nevermore"
+      player_name: "Saitama"
+      is_fake_client: false
+      steamid: 76561198138950989
+      game_team: 3
+    }
+    leagueid: 0
+    end_time: 1597876144
+  }
+}
+

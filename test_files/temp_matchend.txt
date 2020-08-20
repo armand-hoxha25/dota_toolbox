@@ -1,0 +1,38 @@
+Runner thread crashed
+java.lang.InterruptedException: null
+	at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.reportInterruptAfterWait(AbstractQueuedSynchronizer.java:2014) ~[na:1.8.0_261]
+	at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:2048) ~[na:1.8.0_261]
+	at skadistats.clarity.processor.runner.ControllableRunner$1.doLoopControl(ControllableRunner.java:64) ~[clarity-2.5-SNAPSHOT.jar:na]
+	at skadistats.clarity.processor.runner.LoopController.doLoopControl(LoopController.java:35) ~[clarity-2.5-SNAPSHOT.jar:na]
+	at skadistats.clarity.processor.runner.ControllableRunner$LockingLoopController.doLoopControl(ControllableRunner.java:160) ~[clarity-2.5-SNAPSHOT.jar:na]
+	at skadistats.clarity.processor.reader.InputSourceProcessor.processSource(InputSourceProcessor.java:131) ~[clarity-2.5-SNAPSHOT.jar:na]
+	at skadistats.clarity.event.AbstractInvocationPoint.invoke(AbstractInvocationPoint.java:86) ~[clarity-2.5-SNAPSHOT.jar:na]
+	at skadistats.clarity.event.Event.raise(Event.java:37) ~[clarity-2.5-SNAPSHOT.jar:na]
+	at skadistats.clarity.processor.runner.AbstractFileRunner.initAndRunWith(AbstractFileRunner.java:39) ~[clarity-2.5-SNAPSHOT.jar:na]
+	at skadistats.clarity.processor.runner.ControllableRunner.lambda$runWith$0(ControllableRunner.java:238) ~[clarity-2.5-SNAPSHOT.jar:na]
+	at java.lang.Thread.run(Thread.java:748) ~[na:1.8.0_261]
+┌───────────────────────┬───────┬────┬────┬────┬───────┬─────┬────┐
+│ Name                  │ Level │  K │  D │  A │  Gold │  LH │ DN │
+├───────────────────────┼───────┼────┼────┼────┼───────┼─────┼────┤
+│ SleepingForest..      │    23 │  9 │ 12 │ 12 │ 15966 │ 180 │ 36 │
+├───────────────────────┼───────┼────┼────┼────┼───────┼─────┼────┤
+│ Zasta                 │    16 │  2 │ 10 │ 12 │  7572 │  34 │  4 │
+├───────────────────────┼───────┼────┼────┼────┼───────┼─────┼────┤
+│ twitch.tv/ferrOTobii  │    22 │  7 │ 11 │ 15 │ 14389 │ 136 │ 34 │
+├───────────────────────┼───────┼────┼────┼────┼───────┼─────┼────┤
+│ Fresh Cookies         │    22 │  9 │ 10 │ 11 │ 10672 │  32 │  1 │
+├───────────────────────┼───────┼────┼────┼────┼───────┼─────┼────┤
+│ Yorekin               │    25 │  8 │  7 │  7 │ 23004 │ 352 │ 39 │
+├───────────────────────┼───────┼────┼────┼────┼───────┼─────┼────┤
+│ Strumiee              │    23 │  4 │  9 │ 23 │ 14386 │  68 │  5 │
+├───────────────────────┼───────┼────┼────┼────┼───────┼─────┼────┤
+│ Bowgli                │    26 │  5 │  6 │ 19 │ 22207 │ 275 │  4 │
+├───────────────────────┼───────┼────┼────┼────┼───────┼─────┼────┤
+│ Not The Night Vulture │    25 │ 14 │  9 │  9 │ 22595 │ 120 │  6 │
+├───────────────────────┼───────┼────┼────┼────┼───────┼─────┼────┤
+│ Daegan                │    20 │  3 │  7 │ 20 │ 11222 │  24 │  9 │
+├───────────────────────┼───────┼────┼────┼────┼───────┼─────┼────┤
+│ Saitama               │    27 │ 24 │  6 │ 12 │ 29180 │ 252 │ 12 │
+└───────────────────────┴───────┴────┴────┴────┴───────┴─────┴────┘
+
+total time taken: 0.474s
