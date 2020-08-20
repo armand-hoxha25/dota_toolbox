@@ -7287,4 +7287,4 @@ unknown embedded message of kind SOURCE2/604. Please report this in the correspo
 075517: CDOTA_Unit_Hero_Invoker at index 794 has spawned
 075517: CDOTA_BaseNPC at index 1988 has spawned
 077311: CDOTA_BaseNPC at index 1991 has spawned
-total time taken: 2.528s
+total time taken: 2.488s

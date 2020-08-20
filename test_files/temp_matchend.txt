@@ -35,4 +35,4 @@ java.lang.InterruptedException: null
 │ Saitama               │    27 │ 24 │  6 │ 12 │ 29180 │ 252 │ 12 │
 └───────────────────────┴───────┴────┴────┴────┴───────┴─────┴────┘
 
-total time taken: 0.474s
+total time taken: 0.456s
