@@ -38,7 +38,7 @@ def parse_matchinfo(infile):
     return df
     
 if __name__=="__main__":
-    infile="./test_files/5528683650_info.txt"
+    infile="./test_files/temp_info.txt"
     print("Running on test script, Printing final output dataframe")
     df=parse_matchinfo(infile)
     print(df.head())

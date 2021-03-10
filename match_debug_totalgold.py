@@ -1,3 +1,20 @@
+import pandas as pd
+def str_time_to_sec(s):
+    """Convert the string time "HH:MM:SS.xxx" into total seconds.
+
+    Args:
+        s (str): string in the format mentioned above.
+
+    Returns:
+        float: floating point number of the total number of seconds.
+    """    
+    
+    sec=float(s[7:12])
+    min_to_sec=60*float(s[4:6])
+    hr_to_sec=3600*float(s[1:3])
+    
+    return sec+min_to_sec+hr_to_sec   
+
 timestamp_d=[]
 timestamp_r=[]
 
@@ -57,19 +74,3 @@ Dr['timestamp']=timestamp_r
 
 Radiant=pd.DataFrame(Dr)
 Dire=pd.DataFrame(Dd)
-
-def str_time_to_sec(s):
-    """Convert the string time "HH:MM:SS.xxx" into total seconds.
-
-    Args:
-        s (str): string in the format mentioned above.
-
-    Returns:
-        float: floating point number of the total number of seconds.
-    """    
-    
-    sec=float(s[7:12])
-    min_to_sec=60*float(s[4:6])
-    hr_to_sec=3600*float(s[1:3])
-    
-    return sec+min_to_sec+hr_to_sec   

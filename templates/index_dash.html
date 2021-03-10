@@ -148,7 +148,7 @@
             console.log("this is running");
             var graph = {{graphJSON | safe}};
   
-            Plotly.plot('scatter', graph, {});
+            Plotly.plot('scatter', graph.data, graph.layout);
   
             
         </script>

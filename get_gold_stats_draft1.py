@@ -8,8 +8,8 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from get_match_info import parse_matchinfo
 import datetime as dt
-combatfile="./test_files/5528683650_combat.txt"
-infofile="./test_files/5528683650_info.txt"
+combatfile="./test_files/temp_combat.txt"
+infofile="./test_files/temp_info.txt"
 f=open(combatfile,'r')
 
 txt=f.readlines()
@@ -27,6 +27,9 @@ def str_time_to_sec(s):
     Returns:
         float: floating point number of the total number of seconds.
     """    
+    if s[0]=='[':
+        s=s[1:]
+
     sec=float(s[6:])
     min_to_sec=60*float(s[3:5])
     hr_to_sec=3600*float(s[:2])
@@ -81,9 +84,9 @@ for hero in matchinfo['hero_name']:
     'experience_change':experience_change,
     'timestamp_xp':timestamp_xp
     }
-
-df=pd.DataFrame({'gold_change':heroes_dict['npc_dota_hero_arc_warden']['gold_change'],\
-                 'timestamp':heroes_dict['npc_dota_hero_arc_warden']['timestamp_gold']})
+print(matchinfo)
+df=pd.DataFrame({'gold_change':heroes_dict['npc_dota_hero_tusk']['gold_change'],\
+                 'timestamp':heroes_dict['npc_dota_hero_tusk']['timestamp_gold']})
 
 df=df.sort_values(by='timestamp')
 df.plot.scatter(x='timestamp',y='gold_change')
