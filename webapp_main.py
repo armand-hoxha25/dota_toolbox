@@ -58,7 +58,7 @@ def get_graphs(Radiant,Dire):
     layout={'title':'Radiant Net Worth',
                   'xaxis':{'title':'time (min)'},
                   'yaxis':{'title':'Gold'},
-                  
+                  'height':800
                   }
 
     graph={'data':data,'layout':layout}
