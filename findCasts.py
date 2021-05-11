@@ -63,7 +63,7 @@ def getDamage():
         indexList = []
         
         for ind, text in enumerate(g):
-            if 'hits' in text and 'illusion' in text:
+            if 'hits' in text and 'for' in text:
                 indexList.append(ind)
         
         hitDict = []
@@ -73,45 +73,44 @@ def getDamage():
             i = g[i3]
             
             allText = i.split(' ')
-            timeStamp = allText[0]
-            
+            for ind, text in allText:
+                allText[ind] = allText[ind].replace('[','')
+                allText[ind] = allText[ind].replace(']','')
+                
+            timeStamp = allText[0][0]
             if 'illusion' in allText[2]:
                 hero = allText[1]+'_illusion'
-                if 'illusion' in allText[5]:
-                    targetHero = allText[4]+'_illusion'
-                    damageSource = allText[7]
-                    damageDone = allText[9]
-                    healthChange = allText[-1][1:-2]
-                targetHero = allText[4]
-                damageSource = allText[6]
-                damageDone = allText[8]
-                healthChange = allText[-1][1:-2]
-            if 'illusion' in allText[4]:
+            else:
                 hero = allText[1]
-                targetHero = allText[3]+'_illusion'
-                damageSource = allText[6]
-                damageDone = allText[8]
-                healthChange = allText[-1][1:-2]
-            hero = allText[1]
-            targetHero = allText[3]
-            damageSource = allText[5]
-            damageDone = allText[7]
+            for ind, text in enumerate(allText):
+                if 'hits' in text:
+                    if 'illusion' in allText[ind+2]:
+                        targetHero = allText[ind+1]+'_illusion'
+                    else:
+                        targetHero = allText[ind+1]
+                if 'with' in text:
+                    damageSource = allText[ind+1]
+                if 'for' in text:
+                    damageDone = allText[ind+1]
             healthChange = allText[-1][1:-2]
-            
                 
             
             
             
-            castDict.append({"Caster":[hero],"Ability":[ability],"Target":[targetHero],"Level":[level],"TimeStamp":[timeStamp]})
+            hitDict.append({"HealthChange":healthChange,"FromHero":hero,"DamageSource":damageSource,"Target":targetHero,"DamageDone":damageDone,"TimeStamp":timeStamp})
                     
-            # for ind,i2 in enumerate(castDict):
-            #     if i2['Hero'] == hero:
-            #         checker = 1
-            #         castDict[ind]['Casts'].append({'Ability':ability,'Target':targetHero,'Level':level,'TimeStamp':timeStamp})
-            # if checker == 0:
-            #     castDict.append({'Hero':hero, 'Casts':[{'Ability':ability,'Target':targetHero,'Level':level,'TimeStamp':timeStamp}]})
-        castDict = pd.DataFrame(castDict)              
+           
+        hitDict = pd.DataFrame(hitDict)              
     
-    return castDict
+    return hitDict
+
+        
+
 
 gg = getCasts()
+hh = getDamage()
+
+
+
+
+    
