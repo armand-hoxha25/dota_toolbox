@@ -7,11 +7,23 @@ Created on Fri Jul 31 23:56:59 2020
 
 import pandas as pd
 import os 
+import re
 filename='5538111463_1967011834_combat.txt'
 print(__file__)
 filedir=os.path.dirname(__file__)
 print(filedir)
 test_file=os.path.join(filedir,filename)
+
+
+def timestamp_to_s(timestamp):
+    return(
+        int(timestamp[1:3])*3600 +
+        int(timestamp[4:6])*60 +
+        int(timestamp[7:9])
+        )
+
+
+
 def getCasts(test_file):
 
     combatLog = test_file
@@ -86,6 +98,7 @@ def getDamage(test_file):
             #    allText[ind] = allText[ind].replace("]", "")
 
             timeStamp = allText[0]
+            timeStamp = timestamp_to_s(timeStamp)
             if "illusion" in allText[2]:
                 hero = allText[1] + "_illusion"
             else:
@@ -100,16 +113,29 @@ def getDamage(test_file):
                     damageSource = allText[ind + 1]
                 if "for" in text:
                     damageDone = allText[ind + 1]
-            healthChange = allText[-1][1:-2]
+            
+            if 'damage' in allText[-1]:
+                startingHealth = int(damageDone)
+                endHealth = 0
+            else:
+                healthChange = allText[-1][1:-2]
+            
+                healthChange = healthChange.split('->')
+                startingHealth = int(healthChange[0])
+                endHealth = int(healthChange[1])
+                
+            hero = hero.replace('npc_dota_hero_','')
 
             hitDict.append(
                 {
-                    "HealthChange": healthChange,
+                    
                     "FromHero": hero,
                     "DamageSource": damageSource,
                     "Target": targetHero,
                     "DamageDone": int(damageDone),
                     "TimeStamp": timeStamp,
+                    "HealthBefore": startingHealth,
+                    "HealthAfter": endHealth
                 }
             )
 
@@ -118,13 +144,7 @@ def getDamage(test_file):
     return hitDict
 
 
-gg = getCasts()
-hh = getDamage()
+gg = getCasts(test_file)
+hh = getDamage(test_file)
 
-def timestamp_to_s(timestamp):
-    return(
-        int(timestamp[1:3])*3600 +
-        int(timestamp[4:6])*60 +
-        int(timestamp[7:9])
-        )
-hh['TimeStamp']=hh['TimeStamp'].apply(timestamp_to_s)
+
