@@ -1,0 +1,67 @@
+{% extends "base.html" %}  
+
+{% block content %} 
+<div class="container">
+<div class="row"><h2></h2> </div>
+<div class="row"><h2></h2> </div>
+<div class="row"><h2></h2> </div>
+<div class="row"><h2></h2></div>
+<div class="row">
+    <h2></h2>
+</div>
+<div class="row">
+    <h2></h2>
+</div>
+<div class="row">
+    <h2></h2>
+</div>
+<div class="row">
+    <h2></h2>
+</div>
+
+<div class= "row"><h2> {{matchid}}</h2></div>
+<table class="table">
+    <div class="row">
+    <thead class="thead-dark">
+    <tr>
+        <th scope="col"><h2>Name</h2></th>
+        <th scope="col">
+            <h2>Level</h2>
+        </th>
+        <th scope="col">
+            <h2>K</h2>
+        </th>
+        <th scope="col">
+            <h2>D</h2>
+        </th>
+        <th scope="col">
+            <h2>A</h2>
+        </th>
+        <th scope="col">
+            <h2>Gold</h2>
+        </th>
+        <th scope="col">
+            <h2>Last Hits</h2>
+        </th>
+        <th scope="col">
+            <h2>Denies</h2>
+        </th>
+
+        
+    </tr>
+    </thead>
+    </div>
+
+        {% for entry in matchend %}
+        <tr>
+            {% for e in entry%} 
+                <td>
+                <h2>{{e}} </h2>
+                </td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+</table>
+<div class="row"> {{matchid}} </div>
+</div>
+{% endblock %} 

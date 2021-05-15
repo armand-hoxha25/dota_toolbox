@@ -1,0 +1,45 @@
+{% extends "base.html" %} 
+
+{% block content %}
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+    
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+<body class="text-center">
+<div class="container">
+     <form class="form-signin" method="post" role="form">
+        {{form.csrf_token }}
+    <img src="{{url_for('static', filename='images/dota2icon.png')}}"" class="mb-4">
+
+    <div class="row">
+        <div class="col"></div>
+        <div class="col">
+            <input class="form-control input-lg" type="search" id="searchfield" name="searchfield" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-lg-0" type="submit">Search</button>
+            <!-- {{form.searchfield()}}
+            {{form.submit()}} -->
+        </form>
+        </div>
+        <div class="col"></div>
+    </div>
+    <div>
+        {% if message %} 
+            <h1> message </h1>
+        {% endif %}
+    </div>
+</div>
+<p>5975398800</p>
+</body>
+{% endblock %}
