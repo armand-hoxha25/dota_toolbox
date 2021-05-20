@@ -1,4 +1,4 @@
-from app import app
+from dota_toolbox import app
 from flask import render_template, flash, redirect, url_for, request
 from app.forms import (
     search_game,

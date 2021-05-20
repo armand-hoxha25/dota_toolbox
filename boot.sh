@@ -5,4 +5,6 @@ echo $(pwd)
 echo $(ls)
 . venv/bin/activate
 
-exec gunicorn -b :5000  app:app
+#exec bash
+#exec gunicorn -b :${PORT} dota_toolbox
+exec gunicorn dota_toolbox:app
