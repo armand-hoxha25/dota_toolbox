@@ -26,26 +26,26 @@ class Match():
         '''
         try:
             r = requests.get(self.url)
-            print("Match downloaded")
+            sys.stdout.write("Match downloaded \n")
             decompressed = bz2.decompress(r.content)
-            print('decompressing ...')
+            sys.stdout.write('decompressing ...')
             open('./app/temp/' + self.id + '.dem', 'wb').write(decompressed)
-            print('saving as '+self.id+'.dem')
+            sys.stdout.write('saving as {}.dem'.format(self.id))
         except exception:
             self.status = 'no_download'
 
     def get_match_file_url(self):
         ''' fetch the full url from opendota for the match file, somehow opendota has it, idk how
         '''
-        print('getting match URL')
+        sys.stdout.write('getting match URL \n')
         odotapage = requests.get(
             "https://api.opendota.com/api/matches/{} ".format(self.id))
         replay_url = odotapage.json()['replay_url']
-        print('URL received: ', replay_url)
+        sys.stdout.write('URL received: {}'.format(replay_url))
         self.url = replay_url
 
     def parse_match(self):
-
+        sys.stdout.write('parsing match \n')
         out_combat = os.path.join(os.path.dirname(
             __file__), "games", self.id+"_combat.txt")
         # out_info = os.path.join(os.path.dirname(__file__),
@@ -109,7 +109,7 @@ class Match():
         db = client.dota_teamfight_app
         table = db.matches
         r = table.find_one({"game_id": self.id})
-        print(r)
+        sys.stdout.write(str(r))
         if r == None:
             return False
         else:
@@ -131,7 +131,7 @@ class Match():
         client = pymongo.MongoClient(self.MONGODBURI)
         db = client.dota_teamfight_app
         table = db.matches
-        print('-' * 50)
+        sys.stdout.write(('-' * 50))
         print('SEARCHING FOR GAME -- ', self.id)
         r = table.find_one({"game_id": self.id})
         print(r)

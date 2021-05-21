@@ -8,6 +8,7 @@ from app.forms import (
 from werkzeug.urls import url_parse
 from datetime import datetime
 from app.models import Match
+import sys
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -16,15 +17,12 @@ def index():
     form = search_game(request.form)
     if request.method == 'POST':
         #matchid = form['gameid']
-        print('here we go?')
-        print(request.form)
-        print(form.searchfield)
-        print(form.validate())
-        print(form.errors)
+        sys.stdout.write('POST submitted \n')
+
     if form.validate():
         print('we just submitted!!')
         matchid = form.searchfield.data
-        print('----matchid = {}'.format(matchid))
+        sys.stdout.write('----matchid = {}'.format(matchid))
         match = Match(matchid)
         if match.match_in_db():
             return redirect(url_for('match', matchid=matchid))

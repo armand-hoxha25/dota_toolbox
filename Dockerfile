@@ -21,6 +21,9 @@ RUN sudo chmod +x boot.sh
 
 RUN sudo chown -R dota_toolbox:dota_toolbox ./
 USER dota_toolbox
-EXPOSE 5000
+EXPOSE 8000
+
+## compile the clarity jars
+
 
 ENTRYPOINT ["./boot.sh"]
