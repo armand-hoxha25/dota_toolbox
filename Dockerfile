@@ -16,7 +16,7 @@ RUN sudo venv/bin/pip install gunicorn
 
 COPY app app
 
-COPY clarity_jars config.py dota_toolbox.py boot.sh Procfile ./
+COPY config.py dota_toolbox.py boot.sh env.sh Procfile ./
 RUN sudo chmod +x boot.sh
 
 RUN sudo chown -R dota_toolbox:dota_toolbox ./

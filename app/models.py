@@ -17,6 +17,8 @@ class Match():
         self.matchend = ''
         self.teamfights = ''
         self.status = 0
+        self.MONGODBURI = MONGO_DB_URI = MONGO_DB_URI = MONGO_DB_URI = "mongodb+srv://{}:{}@dota-toolbox-east.1gro0.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"\
+            .format(os.environ.get("MONGO_USER"), os.environ.get("MONGO_PASSWORD"))
 
     def fetch_match(self):
         '''
@@ -59,12 +61,12 @@ class Match():
                    # 'info.one-jar.jar',
                    # 'lifestate.one-jar.jar',
                    'matchend.one-jar.jar']
-        parsers = ['mac_claritys/'+parser for parser in parsers]
+        parsers = ['clarity_jars/'+parser for parser in parsers]
         outputs = [out_combat, out_matchend]
         # for parser, out in zip(parsers, outputs):
         # print(base.format(parser,out).split())
         s = subprocess.check_output("java -jar " +
-                                    'app/mac_claritys/matchend.one-jar.jar' + " app/temp/"+self.id+'.dem',
+                                    'app/clarity_jars/matchend.one-jar.jar' + " app/temp/"+self.id+'.dem',
                                     shell=True).decode(sys.stdout.encoding)
         # print(s)
         self.matchend_raw = s
@@ -103,8 +105,7 @@ class Match():
     #  'Denies': remdash[15]]
 
     def match_in_db(self):
-        mongo_uri = "mongodb://localhost:27017/"
-        client = pymongo.MongoClient(mongo_uri)
+        client = pymongo.MongoClient(self.MONGODBURI)
         db = client.dota_teamfight_app
         table = db.matches
         r = table.find_one({"game_id": self.id})
@@ -115,8 +116,7 @@ class Match():
             return True
 
     def insert_in_db(self):
-        mongo_uri = "mongodb://localhost:27017/"
-        client = pymongo.MongoClient(mongo_uri)
+        client = pymongo.MongoClient(self.MONGODBURI)
         db = client.dota_teamfight_app
         table = db.matches
         table.insert_one({
@@ -128,8 +128,7 @@ class Match():
         return True
 
     def retreive_matchend(self):
-        mongo_uri = "mongodb://localhost:27017/"
-        client = pymongo.MongoClient(mongo_uri)
+        client = pymongo.MongoClient(self.MONGODBURI)
         db = client.dota_teamfight_app
         table = db.matches
         print('-' * 50)
