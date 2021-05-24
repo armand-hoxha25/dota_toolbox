@@ -17,7 +17,7 @@ class Match():
         self.matchend = ''
         self.teamfights = ''
         self.status = 0
-        self.MONGODBURI = MONGO_DB_URI = MONGO_DB_URI = MONGO_DB_URI = "mongodb+srv://{}:{}@dota-toolbox-east.1gro0.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"\
+        self.MONGODBURI = "mongodb+srv://{}:{}@dota-toolbox-east.1gro0.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"\
             .format(os.environ.get("MONGO_USER"), os.environ.get("MONGO_PASSWORD"))
 
     def fetch_match(self):
