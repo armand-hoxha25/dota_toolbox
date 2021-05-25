@@ -8,6 +8,7 @@ Created on Fri Jul 31 23:56:59 2020
 import pandas as pd
 import os 
 import re
+import numpy as np
 filename='5538111463_1967011834_combat.txt'
 print(__file__)
 filedir=os.path.dirname(__file__)
@@ -144,7 +145,23 @@ def getDamage(test_file):
     return hitDict
 
 
+def findTeamfights(hitTable):
+    lastTime = hitTable.iloc[0]['TimeStamp']
+    tfList = []
+    iter = 0
+    for tableInd,i in enumerate(hitTable.iloc):
+        
+        if i['TimeStamp']-lastTime>5:
+            
+            lastTime = lastTime + 5
+            tempTable = hitTable.iloc[iter:tableInd+1]
+            tfList.append(tempTable)
+            iter = tableInd
+    
+    return tfList
+        
 gg = getCasts(test_file)
 hh = getDamage(test_file)
+tt = findTeamfights(hh)
 
 
