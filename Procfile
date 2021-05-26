@@ -1,1 +1,1 @@
-web: gunicorn dota_toolbox
+web: gunicorn dota_toolbox:app
