@@ -208,7 +208,7 @@ def findTeamfights(filteredDmgDF):
             teamfightDamageList.pop(0)
             teamfightDamageList.append(tempDf.DamageDone.sum())            
                     
-            if teamfightThresh == 0:            
+            if teamfightThresh == 1:            
                 
            
                 
@@ -222,7 +222,7 @@ def findTeamfights(filteredDmgDF):
                         dfsToMerge = filteredDmgDF[tempIter[0]:tempIter[-1]]
                         teamfightTemp = pd.concat(dfsToMerge)
                     except:
-                        return
+                        
                    
                     if len(dfsToMerge):
                         
@@ -246,7 +246,8 @@ def findTeamfights(filteredDmgDF):
         
 gg = getCasts(test_file)
 hh = getDamage(test_file)
-filtdmg = filter_out_non_hero_dmg(hh)
 tt = splitDamageDf(filtdmg)
+filtdmg = filter_out_non_hero_dmg(hh)
+
 qq = findTeamfights(tt)
 
