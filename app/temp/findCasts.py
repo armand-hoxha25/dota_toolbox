@@ -133,15 +133,15 @@ def getDamage(test_file):
     return hitDict
 
 
-def findTeamfights(hitTable):
+def splitDamageDf(hitTable):
     lastTime = hitTable.iloc[0]['TimeStamp']
     tfList = []
     iter = 0
     for tableInd, i in enumerate(hitTable.iloc):
 
-        if i['TimeStamp']-lastTime > 5:
+        if i['TimeStamp']-lastTime > 30:
 
-            lastTime = lastTime + 5
+            lastTime = lastTime + 30
             tempTable = hitTable.iloc[iter:tableInd+1]
             tfList.append(tempTable)
             iter = tableInd
@@ -154,9 +154,8 @@ def filter_out_non_hero_dmg(damage_df):
     heroStr = 'npc_dota_hero'
     indsKeep = []
     for i in range(0, damage_df.shape[0]):
-        if (heroStr in damage_df['FromHero'][i]) \
-                and (heroStr in damage_df['Target'][i]):
-            indsKeep.append(i)
+        if (heroStr in damage_df['FromHero'][i]) and (heroStr in damage_df['Target'][i]) and (not ('illusion' in damage_df['FromHero'][i])) and (not ('illusion' in damage_df['Target'][i])) and (not(damage_df['FromHero'][i] in damage_df['Target'][i])):
+                        indsKeep.append(i)
 
     return damage_df.iloc[indsKeep]
 
@@ -180,8 +179,75 @@ def average_damage(data, window=5, overlap=1):
 
     return timepoint, damagewindow
 
-
+def findTeamfights(filteredDmgDF):
+    teamfightThresh = 0
+    teamfightList = []
+    teamfightTemp = pd.DataFrame()
+    tempIter = []
+    teamfightDamageList = []
+    for i in range(0,len(filteredDmgDF)):
+        
+        tempDf = filteredDmgDF[i]
+        if len(teamfightDamageList)>20:
+            
+            
+            
+            fromHeros = tempDf.FromHero.unique()
+            toHeros = tempDf.Target.unique()
+            teamfightSTD = np.std(teamfightDamageList)
+            teamfightMean = np.mean(teamfightDamageList)
+            currentSum = tempDf.DamageDone.sum()
+            if (len(fromHeros)>6) and (len(toHeros)>4) and (currentSum>teamfightMean+2*teamfightSTD) and (len(tempDf[tempDf['HealthAfter']==0])>1):
+                teamfightThresh = 1
+                tempIter.append(i)
+                print(i)
+            else:
+                teamfightThresh = 0
+                
+                
+            teamfightDamageList.pop(0)
+            teamfightDamageList.append(tempDf.DamageDone.sum())            
+                    
+            if teamfightThresh == 1:            
+                
+           
+                
+                if len(tempIter):
+                    try:
+                        tempIter.insert(0,tempIter[0]-1)
+                        tempIter.insert(0,tempIter[0]-1)
+                        
+                        tempIter.insert(-1,tempIter[-1]+1)
+                        tempIter.insert(-1,tempIter[-1]+1)
+                        dfsToMerge = filteredDmgDF[tempIter[0]:tempIter[-1]]
+                        teamfightTemp = pd.concat(dfsToMerge)
+                    except:
+                        
+                   
+                    if len(dfsToMerge):
+                        
+                        teamfightList.append(teamfightTemp)
+                        tempIter = []
+        else:
+            teamfightDamageList.append(tempDf.DamageDone.sum())
+            
+                
+                
+    return teamfightList
+    
+                
+            
+                
+        
+        
+        
+        
+        
+        
 gg = getCasts(test_file)
 hh = getDamage(test_file)
+tt = splitDamageDf(filtdmg)
 filtdmg = filter_out_non_hero_dmg(hh)
-tt = findTeamfights(hh)
+
+qq = findTeamfights(tt)
+
