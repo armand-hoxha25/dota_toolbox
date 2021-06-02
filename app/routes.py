@@ -29,18 +29,18 @@ def index():
         else:
             match.get_match_file_url()
             if match.status == 'no_download':
-                return render_template('index.html', form=form, page='home',
+                return render_template('index.html', form=form, page='home', navbar=False,
                                        message='Cannot find match, try another match')
             match.fetch_match()
             if match.status == 'no_download':
-                return render_template('index.html', form=form, page='home',
+                return render_template('index.html', form=form, page='home', navbar=False,
                                        message='Cannot find match, try another match')
             match.parse_match()
             match.matchend_jsonify()
             match.insert_in_db()
             match.retreive_matchend()
             return redirect(url_for('match', matchid=match.id))
-    return render_template('index.html', form=form, page='home')
+    return render_template('index.html', form=form, page='home', navbar=False)
 
 
 @app.route('/match/<matchid>', methods=['GET', 'POST'])
@@ -61,19 +61,19 @@ def match(matchid):
             print('----matchid = {}'.format(matchid))
             match = Match(matchid)
             if match.match_in_db():
-                return redirect(url_for('match', matchid=matchid, matchend=matchid, form=form))
+                return redirect(url_for('match', matchid=matchid, matchend=matchid, form=form, navbar=True))
             else:
                 match.get_match_file_url()
                 if match.status == 'no_download':
-                    return render_template('index.html', form=form, page='home',
+                    return render_template('index.html', form=form, page='home', navbar=False,
                                            message='Cannot find match, try another match')
                 match.fetch_match()
                 if match.status == 'no_download':
-                    return render_template('index.html', form=form, page='home',
+                    return render_template('index.html', form=form, page='home', navbar=False,
                                            message='Cannot find match, try another match')
                 match.parse_match()
                 match.matchend_jsonify()
                 match.insert_in_db()
                 match.retreive_matchend()
                 return redirect(url_for('match', matchid=match.id))
-    return render_template('match.html', matchend=match.matchend, form=form)
+    return render_template('match.html', matchend=match.matchend, form=form, navbar=True)
